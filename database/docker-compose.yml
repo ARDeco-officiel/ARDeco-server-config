@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 services:
   db:
     image: mysql:latest
@@ -10,6 +10,8 @@ services:
       - dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
+    networks:
+      - db_network
 
   db_test:
     image: mysql:latest
@@ -17,14 +19,23 @@ services:
     environment:
       MYSQL_DATABASE: ardeco
       MYSQL_ROOT_PASSWORD: mnw4xav-bud*eha*DCE
-      MYSQL_TCP_PORT: 4406
     volumes:
       - dbdata_test:/var/lib/mysql
     ports:
-      - "4406:4406"
+      - "4406:3306"
+    networks:
+      - db_test_network
 
 volumes:
   dbdata:
     external: true
   dbdata_test:
     external: true
+
+networks:
+  db_network:
+    name: ardeco_db_network
+    driver: bridge
+  db_test_network:
+    name: ardeco_db_test_network
+    driver: bridge
