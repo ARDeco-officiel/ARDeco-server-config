@@ -1,0 +1,10 @@
+[Unit]
+Description=ARDeco service restarter timer
+Requires=ardeco-updater.service
+
+[Timer]
+Unit=ardeco-updater.service
+OnCalendar=*-*-* *:*:00
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Updater tool which restarts ARDeco services
+Wants=ardeco-updater.timer
+
+[Service]
+Type=oneshot
+ExecStart=/bin/java -jar /opt/ardeco/updater/ARDeco-updater.jar
+WorkingDirectory=/opt/ardeco/updater
+
+[Install]
+WantedBy=multi-user.target
